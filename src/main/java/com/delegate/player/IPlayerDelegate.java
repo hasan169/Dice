@@ -5,5 +5,5 @@ import com.info.PlayerInfo;
 
 public interface IPlayerDelegate {
 
-    PlayerInfo createNewPlayer(PlayerInfo newPlayerRequest) throws BusinessException;
+    PlayerInfo createNewPlayer(PlayerInfo playerInfo) throws BusinessException;
 }

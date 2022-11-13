@@ -1,20 +1,19 @@
-package com.entity;
+package com.info;
 
-public class Player {
-    private String id;
+import com.entity.Player;
+
+public class PlayerScoreInfo {
+
     private String name;
+    private String id;
     private int age;
     private Integer score;
 
-    public Player(String id, String name, int age, Integer score) {
+    public PlayerScoreInfo(String id, String name, int age, Integer score) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.score = score;
-    }
-
-    public Player(String name, int age) {
-        this(null, name, age, null);
     }
 
     public String getName() {
