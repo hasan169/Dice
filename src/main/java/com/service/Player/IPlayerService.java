@@ -1,4 +1,4 @@
-package com.service.Player;
+package com.service.player;
 
 import com.entity.Player;
 import com.exception.BusinessException;
