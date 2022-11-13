@@ -57,9 +57,12 @@ public class GameService implements IGameService {
                 throw new BusinessException(MessageConstant.MINIMUM_PLAYERS_NUMBER_MESSAGE);
             }
             isGameRunning = true;
-
-            new Thread(this::play).start();
+            createNewThreadForGame();
         }
+    }
+
+    public void createNewThreadForGame() {
+        new Thread(this::play).start();
     }
 
     public void play() {
