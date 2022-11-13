@@ -72,7 +72,6 @@ public class GameService implements IGameService {
                     Integer initialScore = playerDao.getPlayerScore(player.getId());
                     Integer totalScore = initialScore;
                     int newScore = diceRoll.rollDice(dictRollCounter++);
-                    printScore(player, totalScore, newScore);
                     int totalSix = 0;
                     if (newScore == 6) {
                         totalScore = totalScore == null ? 0 : totalScore;
@@ -82,7 +81,9 @@ public class GameService implements IGameService {
                                 winnerFound = true;
                                 break;
                             }
-                            totalScore = totalScore + newScore;
+                            if (!(initialScore == null && totalSix == 1)) {
+                                totalScore = totalScore + newScore;
+                            }
                             printScore(player, totalScore, newScore);
                             newScore = diceRoll.rollDice(dictRollCounter++);
                         }

@@ -1,6 +1,5 @@
 package service.game;
 
-import com.dao.IPlayerDao;
 import com.dao.PlayerDao;
 import com.entity.Player;
 import com.service.game.GameService;
@@ -34,6 +33,10 @@ public class TestGameService {
         doReturn(3).when(diceRoll).rollDice(counter++);
         doReturn(2).when(diceRoll).rollDice(counter++);
         doReturn(5).when(diceRoll).rollDice(counter++);
+        doReturn(5).when(diceRoll).rollDice(counter++);
+        doReturn(5).when(diceRoll).rollDice(counter++);
+        doReturn(1).when(diceRoll).rollDice(counter++);
+        doReturn(1).when(diceRoll).rollDice(counter++);
         gameService.play();
         assertEquals((int)playerDao.getPlayerScore("1"), 25);
         assertNull(playerDao.getPlayerScore("2"));
@@ -55,9 +58,10 @@ public class TestGameService {
         doReturn(6).when(diceRoll).rollDice(counter++);
         doReturn(6).when(diceRoll).rollDice(counter++);
         doReturn(6).when(diceRoll).rollDice(counter++);
+        doReturn(6).when(diceRoll).rollDice(counter++);
 
         gameService.play();
-        assertEquals((int)playerDao.getPlayerScore("1"), 16);
+        assertEquals((int)playerDao.getPlayerScore("1"), 10);
         assertEquals((int)playerDao.getPlayerScore("2"), 26);
     }
 
@@ -98,9 +102,12 @@ public class TestGameService {
         doReturn(4).when(diceRoll).rollDice(counter++);
         doReturn(5).when(diceRoll).rollDice(counter++);
         doReturn(5).when(diceRoll).rollDice(counter++);
+        doReturn(4).when(diceRoll).rollDice(counter++);
+        doReturn(5).when(diceRoll).rollDice(counter++);
+        doReturn(5).when(diceRoll).rollDice(counter++);
         gameService.play();
-        assertEquals((int)playerDao.getPlayerScore("1"), -4);
-        assertEquals((int)playerDao.getPlayerScore("2"), 18);
-        assertEquals((int)playerDao.getPlayerScore("3"), 29);
+        assertEquals((int)playerDao.getPlayerScore("1"), -14);
+        assertEquals((int)playerDao.getPlayerScore("2"), 17);
+        assertEquals((int)playerDao.getPlayerScore("3"), 28);
     }
 }
