@@ -4,6 +4,8 @@ import com.constant.MessageConstant;
 import com.dao.IPlayerDao;
 import com.entity.Player;
 import com.exception.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Component("gameService")
 public class GameService implements IGameService {
+
+    private static final Logger logger = LoggerFactory.getLogger(GameService.class);
 
     private volatile boolean isGameRunning = false;
     private volatile boolean canNewRoundStart = true;
@@ -81,6 +85,8 @@ public class GameService implements IGameService {
                         while (newScore == 6) {
                             totalSix++;
                             if (totalScore + newScore >= 25) {
+                                System.out.println("Player won " + player);
+                                logger.info("Player won {}", player);
                                 winnerFound = true;
                                 break;
                             }
@@ -100,6 +106,8 @@ public class GameService implements IGameService {
                         playerDao.updatePlayerScore(player.getId(), totalScore);
 
                         if (totalScore >= 25) {
+                            System.out.println("Player won " + player);
+                            logger.info("Player won {}", player);
                             winnerFound = true;
                             break;
                         }
@@ -110,6 +118,7 @@ public class GameService implements IGameService {
 
             }
         } catch (Exception e) {
+            logger.error("Error while running game ", e);
             e.printStackTrace();
         } finally {
             isGameRunning = false;
@@ -118,6 +127,7 @@ public class GameService implements IGameService {
     }
 
     private void printScore(Player player, Integer totalScore, int diceValue) {
+        logger.info("Player name: {}, Total Score: {}, Current Value of Dice: {}", player.getName(), totalScore, diceValue);
         System.out.println(String.format("Player name: %s, Total Score: %s, Current Value of Dice: %s",
                 player.getName(), totalScore, diceValue));
     }

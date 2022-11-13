@@ -1,9 +1,12 @@
 package com.controller.score;
 
 import com.constant.MessageConstant;
+import com.controller.player.PlayerController;
 import com.delegate.score.IScoreDelegate;
 import com.exception.NotFoundException;
 import com.info.PlayerScoreInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +20,14 @@ import java.util.List;
 @RequestMapping("/api/scores")
 public class ScoreController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ScoreController.class);
+
     @Autowired
     private IScoreDelegate scoreDelegate;
 
     @GetMapping
     public ResponseEntity getScores() {
+        logger.info("Received get scores request");
         List<PlayerScoreInfo> playerScoreInfoList;
         try {
             playerScoreInfoList =  scoreDelegate.getScores();
@@ -29,6 +35,7 @@ public class ScoreController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(e.getMessage());
         } catch (Exception e) {
+            logger.error("Exception while getting scores ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(MessageConstant.SERVER_ERROR_MESSAGE);
         }

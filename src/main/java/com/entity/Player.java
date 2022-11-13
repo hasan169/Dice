@@ -48,4 +48,9 @@ public class Player {
     public void setScore(Integer score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Player name: %s, Player id: %s, Player age: %s, Score: %s", name, id, age, score);
+    }
 }
