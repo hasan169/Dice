@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN">
+		<Root level="info" includeLocation="true" >
+			<AppenderRef ref="rollingFile" /> 
+		</Root>
+	</Loggers>
+</Configuration>
