@@ -11,4 +11,5 @@ public class MessageConstant {
             " previous game is still running";
     public static String MINIMUM_PLAYERS_NUMBER_MESSAGE = "Minimum 2 players is required to start the game";
     public static String GAME_START_MESSAGE = "Game started";
+    public static String NO_SCORE_FOUND_MESSAGE = "No score found";
 }

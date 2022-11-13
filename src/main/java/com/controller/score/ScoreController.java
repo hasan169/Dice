@@ -2,6 +2,7 @@ package com.controller.score;
 
 import com.constant.MessageConstant;
 import com.delegate.score.IScoreDelegate;
+import com.exception.NotFoundException;
 import com.info.PlayerScoreInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,9 @@ public class ScoreController {
         List<PlayerScoreInfo> playerScoreInfoList;
         try {
             playerScoreInfoList =  scoreDelegate.getScores();
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(MessageConstant.SERVER_ERROR_MESSAGE);

@@ -1,5 +1,6 @@
 package com.service.player;
 
+import com.constant.MessageConstant;
 import com.dao.IPlayerDao;
 import com.entity.Player;
 import com.exception.BusinessException;
@@ -27,7 +28,7 @@ public class PlayerService implements IPlayerService {
     @Override
     public List<Player> getAllPlayers() throws NotFoundException {
         List<Player> playerList = playerDao.getAllPlayers();
-        if (playerList.size() == 0) throw new NotFoundException("No score found");
+        if (playerList.size() == 0) throw new NotFoundException(MessageConstant.NO_SCORE_FOUND_MESSAGE);
         return playerList;
     }
 }
