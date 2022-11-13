@@ -15,11 +15,14 @@ public class GameService implements IGameService {
     private volatile boolean isGameRunning = false;
     private volatile boolean canNewRoundStart = true;
 
-    @Autowired
     private IPlayerDao playerDao;
+    private IDiceRoll diceRoll;
 
     @Autowired
-    private IDiceRoll diceRoll;
+    public GameService(IPlayerDao playerDao, IDiceRoll diceRoll) {
+        this.playerDao = playerDao;
+        this.diceRoll = diceRoll;
+    }
 
     @Override
     public Player registerNewPlayer(Player player) throws BusinessException {
@@ -59,15 +62,16 @@ public class GameService implements IGameService {
         }
     }
 
-    private void play() {
+    public void play() {
         try {
+            int dictRollCounter = 0;
             boolean winnerFound = false;
             List<Player> playerList = playerDao.getAllPlayers();
             while (!winnerFound) {
                 for (Player player: playerList) {
                     Integer initialScore = playerDao.getPlayerScore(player.getId());
                     Integer totalScore = initialScore;
-                    int newScore = diceRoll.rollDice();
+                    int newScore = diceRoll.rollDice(dictRollCounter++);
                     printScore(player, totalScore, newScore);
                     int totalSix = 0;
                     if (newScore == 6) {
@@ -80,7 +84,7 @@ public class GameService implements IGameService {
                             }
                             totalScore = totalScore + newScore;
                             printScore(player, totalScore, newScore);
-                            newScore = diceRoll.rollDice();
+                            newScore = diceRoll.rollDice(dictRollCounter++);
                         }
                         if (initialScore == null && totalSix == 1 && newScore == 4) {
                             continue;

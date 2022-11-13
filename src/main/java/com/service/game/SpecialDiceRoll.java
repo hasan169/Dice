@@ -9,7 +9,7 @@ import java.util.*;
 public class SpecialDiceRoll implements IDiceRoll {
 
     @Override
-    public int rollDice() {
+    public int rollDice(int counter) {
         final String uri = "http://developer-test.hishab.io/api/v1/roll-dice";
         RestTemplate restTemplate = new RestTemplate();
         Map<String, Integer> result = restTemplate.getForObject(uri, HashMap.class);
