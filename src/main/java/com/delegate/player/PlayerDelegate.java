@@ -13,8 +13,12 @@ import org.springframework.stereotype.Component;
 @Component("playerDelegate")
 public class PlayerDelegate implements IPlayerDelegate {
 
-    @Autowired
     private IPlayerService playerService;
+
+    @Autowired
+    public PlayerDelegate(IPlayerService playerService) {
+        this.playerService = playerService;
+    }
 
     @Override
     public PlayerInfo createNewPlayer(PlayerInfo playerInfo) throws BusinessException {
