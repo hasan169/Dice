@@ -48,4 +48,4 @@ Below properties are available:
 * Under the root directory Dice, run `docker build . -t ${imagename:tag}`. E.x `docker build . -t dice:1.0`.
 * Ater image build is completed, run `docker run --publish [host_port]:[container_port] ${imagename:tag}`. e.x  `docker run --publish 8080:8080 dice:1.0`. Here container port is the server.port mentioned in the config file.
 * After running the container, game will start.
-* For api documentation swagger ui can be loaded in browser by openning http://localhost:port/swagger-ui.html. E.x http://localhost:8080/swagger-ui.html. Here port is server.port mentioned in config file.
+* For api documentation swagger ui can be loaded in browser by openning http://localhost:port/swagger-ui.html. E.x http://localhost:8080/swagger-ui.html. Here port is [host_port] mentioned in docker run command.
