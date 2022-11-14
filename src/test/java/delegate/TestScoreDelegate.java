@@ -1,9 +1,8 @@
-package service.game;
+package delegate;
 
 import com.constant.MessageConstant;
 import com.delegate.score.ScoreDelegate;
 import com.entity.Player;
-import com.exception.BusinessException;
 import com.exception.NotFoundException;
 import com.info.PlayerScoreInfo;
 import com.service.player.IPlayerService;

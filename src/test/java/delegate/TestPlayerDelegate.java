@@ -1,4 +1,4 @@
-package service.game;
+package delegate;
 
 import com.constant.MessageConstant;
 import com.delegate.player.PlayerDelegate;

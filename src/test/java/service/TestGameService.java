@@ -1,4 +1,4 @@
-package service.game;
+package service;
 
 import com.config.ConfigProperties;
 import com.constant.MessageConstant;
