@@ -18,8 +18,8 @@ score but will have to roll another 6 before they start accumulating points.
 * Each time a player hits the number 6 he will then get one extra throw.
 
 * The game can be played by running both in local machine and in docker container.
-* The project is built using Sring Boot and Java. 
-* Swagger and Swagger ui is usued for api documentation.
+* The project is built using Spring Boot and Java. 
+* Swagger and Swagger ui is used for api documentation.
 
 ### Instruction for running the game in local machine ###
 ### Requirements ###
@@ -31,7 +31,7 @@ score but will have to roll another 6 before they start accumulating points.
 * Under the root directory Dice, run mvn clean package.
 * After build is completed, run the start script at location: `bin/dice-game.sh`. E.x. nohup bin/dice-game.sh &.
 * After running the game, logs can be found at location: logs/dice.log.
-* After running the game, for api documentation swagger ui can be loaded in browser by openning http://localhost:port/swagger-ui.html. E.x http://localhost:8080/swagger-ui.html. Here port is server.port mentioned in config file.
+* After running the game, for api documentation swagger ui can be loaded in browser by opening http://localhost:port/swagger-ui.html. E.x http://localhost:8080/swagger-ui.html. Here port is server.port mentioned in config file.
 
 For changing configs we have to change the file config/application.properties.
 Below properties are available:
@@ -40,12 +40,12 @@ Below properties are available:
 * server.port -> Port for api endpoints. Default is 8080.
 
 ### Instruction for running the game in Docker container ###
-### Requirments ###
+### Requirements ###
 * Docker installed on the machine.
 
 ### Build instruction ##
 * Clone the repository and checkout the main branch.
 * Under the root directory Dice, run `docker build . -t ${imagename:tag}`. E.x `docker build . -t dice:1.0`.
-* Ater image build is completed, run `docker run --publish [host_port]:[container_port] ${imagename:tag}`. e.x  `docker run --publish 8080:8080 dice:1.0`. Here container port is the server.port mentioned in the config file.
+* After image build is completed, run `docker run --publish [host_port]:[container_port] ${imagename:tag}`. e.x  `docker run --publish 8080:8080 dice:1.0`. Here container port is the server.port mentioned in the config file.
 * After running the container, game will start.
-* For api documentation swagger ui can be loaded in browser by openning http://localhost:port/swagger-ui.html. E.x http://localhost:8080/swagger-ui.html. Here port is [host_port] mentioned in docker run command.
+* For api documentation swagger ui can be loaded in browser by opening http://localhost:port/swagger-ui.html. E.x http://localhost:8080/swagger-ui.html. Here port is [host_port] mentioned in docker run command.
