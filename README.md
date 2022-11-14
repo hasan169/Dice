@@ -22,14 +22,14 @@ score but will have to roll another 6 before they start accumulating points.
 * Swagger and Swagger ui is usued for api documentation.
 
 ### Instruction for running the game in local machine ###
-### Requirments ###
+### Requirements ###
 * Java version minimum 1.8
 * Maven
 
 ### Build instruction ##
 * Clone the repository and checkout the main branch.
 * Under the root directory Dice, run mvn clean package.
-* Ater build is completed, run the start script at location: `bin/dice-game.sh`. E.x. nohup bin/dice-game.sh &.
+* After build is completed, run the start script at location: `bin/dice-game.sh`. E.x. nohup bin/dice-game.sh &.
 * After running the game, logs can be found at location: logs/dice.log.
 * After running the game, for api documentation swagger ui can be loaded in browser by openning http://localhost:port/swagger-ui.html. E.x http://localhost:8080/swagger-ui.html. Here port is server.port mentioned in config file.
 
