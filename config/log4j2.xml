@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Configuration status="WARN">
+<Configuration>
+	<Appenders>
+		<RollingFile name="rollingFile" fileName="logs/dice.log"  filePattern="logs/dice-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout>
+				<pattern>%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="200 MB" />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="100" />
+		</RollingFile>
+	</Appenders>
 	<Loggers>
 		<Root level="info" includeLocation="true" >
 			<AppenderRef ref="rollingFile" />
