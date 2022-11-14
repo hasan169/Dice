@@ -36,7 +36,6 @@ public class PlayerController {
             PlayerInfo playerInfo = playerDelegate.createNewPlayer(newPlayerInfo);
             return ResponseEntity.status(HttpStatus.OK).body(playerInfo);
         } catch (BusinessException e) {
-            logger.error("Business error while creating new player ", e);
             return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
             logger.error("Exception while creating new player ", e);

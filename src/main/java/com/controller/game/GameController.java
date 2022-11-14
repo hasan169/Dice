@@ -30,7 +30,6 @@ public class GameController {
             logger.info("Received start game request ");
             gameDelegate.startGame();
         } catch (BusinessException e) {
-            logger.error("Business error while starting game ", e);
             return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
             logger.error("Exception while starting game ", e);
