@@ -1,6 +1,8 @@
 package service.game;
 
+import com.config.ConfigProperties;
 import com.constant.MessageConstant;
+import com.constant.Properties;
 import com.dao.PlayerDao;
 import com.entity.Player;
 import com.exception.BusinessException;
@@ -22,11 +24,15 @@ public class TestGameService {
     @Mock
     SpecialDiceRoll diceRoll;
 
+    @Mock
+    ConfigProperties configProperties;
+
     @Test
     public void testFirstPlayerShouldWin() {
+        doReturn("25").when(configProperties).getConfigValue(Properties.DICE_MAXIMUM_SCORE);
         int counter = 0;
         PlayerDao playerDao = new PlayerDao();
-        GameService gameService = new GameService(playerDao, diceRoll);
+        GameService gameService = new GameService(playerDao, diceRoll, configProperties);
         playerDao.addNewPlayer(new Player("A", 22));
         playerDao.addNewPlayer(new Player("B", 33));
         doReturn(6).when(diceRoll).rollDice(counter++);
@@ -49,8 +55,9 @@ public class TestGameService {
     @Test
     public void testSecondPlayerShouldWin() {
         int counter = 0;
+        doReturn("25").when(configProperties).getConfigValue(Properties.DICE_MAXIMUM_SCORE);
         PlayerDao playerDao = new PlayerDao();
-        GameService gameService = new GameService(playerDao, diceRoll);
+        GameService gameService = new GameService(playerDao, diceRoll, configProperties);
         playerDao.addNewPlayer(new Player("A", 22));
         playerDao.addNewPlayer(new Player("B", 33));
         doReturn(6).when(diceRoll).rollDice(counter++);
@@ -71,9 +78,10 @@ public class TestGameService {
 
     @Test
     public void testThirdPlayerShouldWin() {
+        doReturn("25").when(configProperties).getConfigValue(Properties.DICE_MAXIMUM_SCORE);
         int counter = 0;
         PlayerDao playerDao = new PlayerDao();
-        GameService gameService = new GameService(playerDao, diceRoll);
+        GameService gameService = new GameService(playerDao, diceRoll, configProperties);
         playerDao.addNewPlayer(new Player("A", 22));
         playerDao.addNewPlayer(new Player("B", 33));
         playerDao.addNewPlayer(new Player("C", 43));
@@ -118,7 +126,7 @@ public class TestGameService {
     @Test
     public void testRegisterNewPlayer() throws BusinessException {
         PlayerDao playerDao = new PlayerDao();
-        GameService gameService = new GameService(playerDao, diceRoll);
+        GameService gameService = new GameService(playerDao, diceRoll, configProperties);
         registerFourPlayer(gameService);
         List<Player> playerList = playerDao.getAllPlayers();
         assertEquals(playerList.size(), 4);
@@ -127,7 +135,7 @@ public class TestGameService {
     @Test
     public void testRegisterNewPlayerShouldThrowPlayerExceedException() throws BusinessException {
         PlayerDao playerDao = new PlayerDao();
-        GameService gameService = new GameService(playerDao, diceRoll);
+        GameService gameService = new GameService(playerDao, diceRoll, configProperties);
         registerFourPlayer(gameService);
         try {
             gameService.registerNewPlayer(new Player("E", 77));
@@ -139,7 +147,7 @@ public class TestGameService {
     @Test
     public void testStartGame() throws BusinessException {
         PlayerDao playerDao = new PlayerDao();
-        GameService gameService = spy(new GameService(playerDao, diceRoll));
+        GameService gameService = spy(new GameService(playerDao, diceRoll, configProperties));
         registerFourPlayer(gameService);
         doNothing().when(gameService).createNewThreadForGame();
         gameService.startGame();
@@ -149,7 +157,7 @@ public class TestGameService {
     @Test
     public void testStartGameShouldThrowMinimumPlayerException() throws BusinessException {
         PlayerDao playerDao = new PlayerDao();
-        GameService gameService = spy(new GameService(playerDao, diceRoll));
+        GameService gameService = spy(new GameService(playerDao, diceRoll, configProperties));
         Player player1 = new Player("A", 22);
         gameService.registerNewPlayer(player1);
         try {

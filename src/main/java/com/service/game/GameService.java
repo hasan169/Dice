@@ -1,6 +1,8 @@
 package com.service.game;
 
+import com.config.ConfigProperties;
 import com.constant.MessageConstant;
+import com.constant.Properties;
 import com.dao.IPlayerDao;
 import com.entity.Player;
 import com.exception.BusinessException;
@@ -21,11 +23,13 @@ public class GameService implements IGameService {
 
     private IPlayerDao playerDao;
     private IDiceRoll diceRoll;
+    private ConfigProperties configProperties;
 
     @Autowired
-    public GameService(IPlayerDao playerDao, IDiceRoll diceRoll) {
+    public GameService(IPlayerDao playerDao, IDiceRoll diceRoll, ConfigProperties configProperties) {
         this.playerDao = playerDao;
         this.diceRoll = diceRoll;
+        this.configProperties = configProperties;
     }
 
     @Override
@@ -71,6 +75,8 @@ public class GameService implements IGameService {
 
     public void play() {
         try {
+            int maximumScore = Integer.parseInt(configProperties.getConfigValue(Properties.DICE_MAXIMUM_SCORE));
+            logger.info("Maximum Score {}", maximumScore);
             int dictRollCounter = 0;
             boolean winnerFound = false;
             List<Player> playerList = playerDao.getAllPlayers();
@@ -84,7 +90,7 @@ public class GameService implements IGameService {
                         totalScore = totalScore == null ? 0 : totalScore;
                         while (newScore == 6) {
                             totalSix++;
-                            if (totalScore + newScore >= 25) {
+                            if (totalScore + newScore >= maximumScore) {
                                 System.out.println("Player won " + player);
                                 logger.info("Player won {}", player);
                                 winnerFound = true;
@@ -105,7 +111,7 @@ public class GameService implements IGameService {
                         printScore(player, totalScore, newScore);
                         playerDao.updatePlayerScore(player.getId(), totalScore);
 
-                        if (totalScore >= 25) {
+                        if (totalScore >= maximumScore) {
                             System.out.println("Player won " + player);
                             logger.info("Player won {}", player);
                             winnerFound = true;
