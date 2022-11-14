@@ -11,13 +11,13 @@ not have to get 25 exactly (>=25 is OK). The number 25 is onfigurable.
 * To get started the player will need to get 6. If the player gets 1-5 they
 will then have to wait for their turn before having another go.
 * When finally hitting the number 6 the player will have to throw again
-to determine the starting point. Getting a 6 on the first try will give ou 0.
+to determine the starting point. Getting a 6 on the first try will give you 0.
 * Each time a player hits number 4, he will get -4 from the total score.
 * If a player hits a 4 after hitting the first 6, they do not get a negative
 score but will have to roll another 6 before they start accumulating points.
 * Each time a player hits the number 6 he will then get one extra throw.
 
-* The game can be played by running in local machine and in docker container.
+* The game can be played by running both in local machine and in docker container.
 * The project is built using Sring Boot and Java. 
 * Swagger and Swagger ui is usued for api documentation.
 
