@@ -6,7 +6,7 @@
 
     <groupId>Dice</groupId>
     <artifactId>Dice</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
