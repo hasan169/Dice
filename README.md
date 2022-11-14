@@ -7,7 +7,7 @@ The rules of the game are:
 * There is a maximum of 4 players.
 * Each player has a name and age.
 * The first player to get a total sum of 25 is the winner. A player does
-not have to get 25 exactly (>=25 is OK). The number 25 is onfigurable.
+not have to get 25 exactly (>=25 is OK). The number 25 is configurable.
 * To get started the player will need to get 6. If the player gets 1-5 they
 will then have to wait for their turn before having another go.
 * When finally hitting the number 6 the player will have to throw again
