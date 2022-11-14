@@ -163,6 +163,7 @@ public class TestGameService {
         expectedEx.expectMessage(MessageConstant.MINIMUM_PLAYERS_NUMBER_MESSAGE);
         PlayerDao playerDao = new PlayerDao();
         GameService gameService = spy(new GameService(playerDao, diceRoll, configProperties));
+        gameService.startGame();
         Player player1 = new Player("A", 22);
         gameService.registerNewPlayer(player1);
         gameService.startGame();

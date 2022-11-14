@@ -61,7 +61,7 @@ public class GameService implements IGameService {
                 throw new BusinessException(MessageConstant.GAME_ALREADY_RUNNING_MESSAGE);
             }
             List<Player> playerList = playerDao.getAllPlayers();
-            if (playerList.size() < 2) {
+            if (canNewRoundStart || playerList.size() < 2) {
                 throw new BusinessException(MessageConstant.MINIMUM_PLAYERS_NUMBER_MESSAGE);
             }
             isGameRunning = true;
