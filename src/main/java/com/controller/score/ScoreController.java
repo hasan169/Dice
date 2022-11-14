@@ -1,7 +1,6 @@
 package com.controller.score;
 
 import com.constant.MessageConstant;
-import com.controller.player.PlayerController;
 import com.delegate.score.IScoreDelegate;
 import com.exception.NotFoundException;
 import com.info.PlayerScoreInfo;

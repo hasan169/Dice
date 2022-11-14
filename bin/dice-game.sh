@@ -6,7 +6,7 @@ cd $base_dir
 base_dir=`pwd`
 cd $home_dir
 
-if [ ! -d "$base_dir/lib" ]; then
+if [ ! -d "$base_dir/target/lib" ]; then
   echo "Unable to find $base_dir/lib, which is required to run."
   exit 1
 fi
@@ -19,7 +19,11 @@ fi
 
 CLASSPATH=$base_dir/config
 
-for jar in $base_dir/lib/*.jar; do
+for jar in $base_dir/target/lib/*.jar; do
+    CLASSPATH=$CLASSPATH:$jar
+done
+
+for jar in $base_dir/target/*.jar; do
     CLASSPATH=$CLASSPATH:$jar
 done
 
