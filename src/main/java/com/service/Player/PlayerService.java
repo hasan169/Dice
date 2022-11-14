@@ -26,9 +26,7 @@ public class PlayerService implements IPlayerService {
     }
 
     @Override
-    public List<Player> getAllPlayers() throws NotFoundException {
-        List<Player> playerList = playerDao.getAllPlayers();
-        if (playerList.size() == 0) throw new NotFoundException(MessageConstant.NO_SCORE_FOUND_MESSAGE);
-        return playerList;
+    public List<Player> getAllPlayers() {
+        return playerDao.getAllPlayers();
     }
 }

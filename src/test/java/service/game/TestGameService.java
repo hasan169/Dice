@@ -8,7 +8,9 @@ import com.entity.Player;
 import com.exception.BusinessException;
 import com.service.game.GameService;
 import com.service.game.SpecialDiceRoll;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -26,6 +28,9 @@ public class TestGameService {
 
     @Mock
     ConfigProperties configProperties;
+
+    @Rule
+    public ExpectedException expectedEx = ExpectedException.none();
 
     @Test
     public void testFirstPlayerShouldWin() {
@@ -134,14 +139,12 @@ public class TestGameService {
 
     @Test
     public void testRegisterNewPlayerShouldThrowPlayerExceedException() throws BusinessException {
+        expectedEx.expect(BusinessException.class);
+        expectedEx.expectMessage(MessageConstant.PLAYERS_NUMBER_EXCEED_MESSAGE);
         PlayerDao playerDao = new PlayerDao();
         GameService gameService = new GameService(playerDao, diceRoll, configProperties);
         registerFourPlayer(gameService);
-        try {
-            gameService.registerNewPlayer(new Player("E", 77));
-        } catch (BusinessException e) {
-            assertEquals(e.getMessage(), MessageConstant.PLAYERS_NUMBER_EXCEED_MESSAGE);
-        }
+        gameService.registerNewPlayer(new Player("E", 77));
     }
 
     @Test
@@ -156,16 +159,13 @@ public class TestGameService {
 
     @Test
     public void testStartGameShouldThrowMinimumPlayerException() throws BusinessException {
+        expectedEx.expect(BusinessException.class);
+        expectedEx.expectMessage(MessageConstant.MINIMUM_PLAYERS_NUMBER_MESSAGE);
         PlayerDao playerDao = new PlayerDao();
         GameService gameService = spy(new GameService(playerDao, diceRoll, configProperties));
         Player player1 = new Player("A", 22);
         gameService.registerNewPlayer(player1);
-        try {
-            gameService.startGame();
-        } catch (BusinessException e) {
-            assertEquals(e.getMessage(), MessageConstant.MINIMUM_PLAYERS_NUMBER_MESSAGE);
-        }
-
+        gameService.startGame();
         verify(gameService, never()).play();
     }
 
