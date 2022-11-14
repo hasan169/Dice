@@ -102,6 +102,7 @@ public class GameService implements IGameService {
                             printScore(player, totalScore, newScore);
                             newScore = diceRoll.rollDice(dictRollCounter++);
                         }
+                        // Since the player got 4 after hitting the first 6, he will wait for his next turn
                         if (initialScore == null && totalSix == 1 && newScore == 4) {
                             printScore(player, totalScore, -4);
                             continue;
