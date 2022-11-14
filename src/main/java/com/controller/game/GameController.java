@@ -4,6 +4,7 @@ import com.constant.MessageConstant;
 import com.controller.player.PlayerController;
 import com.delegate.game.IGameDelegate;
 import com.exception.BusinessException;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class GameController {
     private IGameDelegate gameDelegate;
 
     @GetMapping
+    @ApiOperation(value = "Starting the dice game", response = String.class)
     public ResponseEntity startGame() {
         try {
             logger.info("Received start game request ");

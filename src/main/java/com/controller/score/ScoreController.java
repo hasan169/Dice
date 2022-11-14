@@ -4,6 +4,8 @@ import com.constant.MessageConstant;
 import com.delegate.score.IScoreDelegate;
 import com.exception.NotFoundException;
 import com.info.PlayerScoreInfo;
+import com.info.PlayerScoreInfos;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ public class ScoreController {
     private IScoreDelegate scoreDelegate;
 
     @GetMapping
+    @ApiOperation(value = "Getting player scores", response = PlayerScoreInfos.class)
     public ResponseEntity getScores() {
         logger.info("Received get scores request");
         List<PlayerScoreInfo> playerScoreInfoList;
@@ -38,6 +41,6 @@ public class ScoreController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(MessageConstant.SERVER_ERROR_MESSAGE);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(playerScoreInfoList);
+        return ResponseEntity.status(HttpStatus.OK).body(new PlayerScoreInfos(playerScoreInfoList));
     }
 }

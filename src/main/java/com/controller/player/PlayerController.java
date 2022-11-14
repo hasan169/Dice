@@ -6,6 +6,8 @@ import com.exception.BusinessException;
 
 import com.info.NewPlayerRequest;
 import com.info.PlayerInfo;
+import com.info.PlayerScoreInfos;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ public class PlayerController {
     private IPlayerDelegate playerDelegate;
 
     @PostMapping
+    @ApiOperation(value = "Creating a new player", response = PlayerInfo.class)
     public ResponseEntity createNewPlayer(@RequestBody NewPlayerRequest newPlayerRequest) {
         try {
             logger.info("Received new player request {}", newPlayerRequest);
