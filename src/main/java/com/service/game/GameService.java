@@ -103,6 +103,7 @@ public class GameService implements IGameService {
                             newScore = diceRoll.rollDice(dictRollCounter++);
                         }
                         if (initialScore == null && totalSix == 1 && newScore == 4) {
+                            printScore(player, totalScore, -4);
                             continue;
                         }
                     }
